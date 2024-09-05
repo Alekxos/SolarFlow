@@ -24,3 +24,10 @@ def fit_circles_by_frequency(frequencies, impedance_data_real, impedance_data_im
 
 def extract_theta_by_frequency(freqs, impedance_data_real, impedance_data_im, circle_fits):
     return {freq: np.arctan2(impedance_data_im[freq]- circle_fits[freq][1], impedance_data_real[freq] - circle_fits[freq][0]) for freq in freqs}
+
+def halve_data(data_list):
+    half_length = len(data_list[0]) // 2
+    first_half = [data[:half_length] for data in data_list]
+    second_half = [data[half_length:] for data in data_list]
+    return first_half, second_half
+

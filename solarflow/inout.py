@@ -12,12 +12,16 @@ def read_csv_file(file_name, verbose=True, delimiter=',', start_line=0):
             if i < start_line:
                 continue
             elif i == start_line:
-                headers =line.strip().split(delimiter)
+                headers = line.strip().split(delimiter)
+                headers = [header.strip() for header in headers]
             else:
                 for column, value in enumerate(line.strip().split(delimiter)):
                     data[headers[column]].append(value)
     if verbose:
         print(f"Read {len(data)} lines from {file_name}")
     for key in data.keys():
-        data[key] = np.array([float(value) if value != '' else np.nan for value in data[key]])
+        data[key] = np.array([float(value) if value != '' and value != ' ' else np.nan for value in data[key]])
     return headers, data
+
+def to_filename(string):
+    return string.lower().replace(' ', '_')

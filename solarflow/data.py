@@ -30,4 +30,4 @@ def extract_data_by_header(values_by_frequency, header):
     """
     Return a list of values for a given header.
     """
-    return {frequency: [datapoint[header] for datapoint in values_by_frequency[frequency]] for frequency in values_by_frequency.keys()}
+    return {frequency: np.array([datapoint[header] for datapoint in values_by_frequency[frequency]]) for frequency in values_by_frequency.keys()}
