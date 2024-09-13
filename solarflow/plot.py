@@ -43,8 +43,8 @@ def plot_impedance_by_frequency(frequencies, impedance_data_real, impedance_data
     formatter = FuncFormatter(ohms_to_kOhms)
     axis.xaxis.set_major_formatter(formatter)
     axis.yaxis.set_major_formatter(formatter)
-    axis.set_xlabel("Z' (kOhm)", fontsize=18)
-    axis.set_ylabel("Z'' (kOhm)", fontsize=18)
+    axis.set_xlabel("Z'", fontsize=18, loc='right')
+    axis.set_ylabel("Z''", fontsize=18, loc='bottom', rotation=0)
     if add_to_legend:
         axis.legend(loc='lower right')
 
@@ -63,6 +63,11 @@ def plot_circle_fit(circle_fits, axis, plot_centers = False):
         # Recompute limits and autoscale
         axis.relim()
         axis.autoscale_view()
+
+    # Find last limits and center plot
+    max_limit = np.max(np.abs(np.append(np.array(axis.get_xlim()), np.array(axis.get_ylim()))))
+    axis.set_xlim([-max_limit, max_limit])
+    axis.set_ylim([max_limit, -max_limit])
 
 def plot_theta_vs_voltage(frequencies, theta_data, voltage_data, axis):
     """

@@ -25,3 +25,18 @@ def read_csv_file(file_name, verbose=True, delimiter=',', start_line=0):
 
 def to_filename(string):
     return string.lower().replace(' ', '_')
+
+def combine_data_from_list(directory):
+    headers, data = read_csv_file(directory[0],
+                                   delimiter=',',
+                                   start_line=3)
+    
+    if len(directory) > 1:
+        for file in directory[1:]:
+            file_headers, file_data = read_csv_file(file,
+                                    delimiter=',',
+                                    start_line=3)
+            for header in headers:
+                data[header] = np.append(data[header], (file_data[header]))
+
+    return headers, data

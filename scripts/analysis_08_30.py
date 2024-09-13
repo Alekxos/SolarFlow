@@ -8,7 +8,7 @@ from solarflow.fit import fit_data, inverse_quadratic
 from solarflow.analysis import fit_circles_by_frequency, extract_theta_by_frequency
 
 if __name__ == '__main__':
-     headers, data = read_csv_file(f'/Users/minerva/Lab/SolarFlow/data/R_4_08_30_freq_sweep.csv',
+     headers, data = read_csv_file(f'../data/R_4_08_30_freq_sweep.csv',
                                    delimiter=',',
                                    start_line=3)
 
@@ -35,7 +35,7 @@ if __name__ == '__main__':
           if set_name == 'upper':
                circle_fits = fit_circles_by_frequency(selected_frequencies, impedance_data_real, impedance_data_im)
                plot_circle_fit(circle_fits, axis=ax, plot_centers = True)
-          plt.savefig(f'/Users/minerva/Lab/SolarFlow/output/08_30/impedance_data_{set_name}.png', dpi=500, bbox_inches='tight')
+          plt.savefig(f'../output/08_30/impedance_data_{set_name}.png', dpi=500, bbox_inches='tight')
 
      # Plot circle radius as a function of frequency.
      fig, ax = plt.subplots()
@@ -49,4 +49,4 @@ if __name__ == '__main__':
      print(f"Result: {result}")
      plot_fit(ax, selected_frequencies, result, 'Inverse Quadratic', inverse_quadratic, color='b', x_scale=1e3)
 
-     plt.savefig(f'/Users/minerva/Lab/SolarFlow/output/08_30/radius_vs_omega.png', dpi=500, bbox_inches='tight')
+     plt.savefig(f'../output/08_30/radius_vs_omega.png', dpi=500, bbox_inches='tight')
